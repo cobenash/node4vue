@@ -1,13 +1,13 @@
 FROM node:latest
 
-MAINTAINER Victor Yang <victor.yang@hellosanta.com.tw>
-
-RUN npm install --quiet --global \
-      vue-cli
-
-RUN mkdir /app
-COPY . /app
-
 WORKDIR /app
 
+RUN npm --user root --unsafe-perm true install npm -g
+
+RUN npm install -g --silent \
+    yarn \
+    vue-cli
+
 EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
