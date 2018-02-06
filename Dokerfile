@@ -1,0 +1,15 @@
+FROM node
+
+MAINTAINER Victor Yang <victor.yang@hellosanta.com.tw>
+
+RUN npm install --quiet --global \
+      vue-cli
+
+RUN mkdir /code
+COPY . /code
+
+WORKDIR /code
+
+CMD ["npm", "start"]
+
+EXPOSE 3000
