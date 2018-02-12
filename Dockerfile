@@ -1,13 +1,21 @@
 FROM node:latest
 
-WORKDIR /app
+# Create app directory
+WORKDIR /usr/src/app
 
-RUN npm --user root --unsafe-perm true install npm -g
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
 
-RUN npm install -g --silent \
-    yarn \
-    vue-cli
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm install --only=production
+
+COPY . .
+
+RUN npm run build
 
 EXPOSE 3000
-
-CMD ["npm", "run", "dev"]
+CMD [ "npm","run","start" ]
